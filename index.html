@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Product App</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="product">
+            <div class="product-image">
+                <img :src="image">
+            </div>
+            <div class="product-info">
+                <h1>{{product.name}}</h1>
+                {{product.description}}
+                <h3>For more information: click
+                    <a :href="sourceInformation" target="_blank">here</a>
+                </h3>
+                <span v-show="onSale">On Sale!</span>
+                <p :class="{outOfStock: !inStock}">Out of Stock</p>
+                <p v-show="onSale">{{nameOfBrand}}</p>
+                <span>Colors:</span>
+                <ul>
+                    <li v-for="(detail,index) in productDetails">
+                        <span @mouseover="updateProductImage(index)">
+                            {{detail.color}}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <button v-on:click="addToCart()" 
+                :disabled="!inStock"
+                :class="{disabledButton: !inStock}">Add2Cart</button>
+            <div class="cart">
+                <p>Cart({{cart}})</p>
+            </div>
+            <button v-on:click="removeToCart()">Take Cart off</button>
+
+        </div>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="main.js"></script>
+    <link href="main.css" rel="stylesheet">
+</body>
+
+</html>
